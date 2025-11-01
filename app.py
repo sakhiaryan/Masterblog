@@ -24,31 +24,28 @@ def index():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        # Formularwerte auslesen
         author = request.form.get("author")
         title = request.form.get("title")
         content = request.form.get("content")
 
-        # Bestehende Beiträge laden
         posts = load_posts()
-
-        # Neue ID bestimmen (höchste ID + 1)
         new_id = max([p["id"] for p in posts], default=0) + 1
+        new_post = {"id": new_id, "author": author, "title": title, "content": content}
 
-        # Neuen Beitrag hinzufügen
-        new_post = {
-            "id": new_id,
-            "author": author,
-            "title": title,
-            "content": content
-        }
         posts.append(new_post)
         save_posts(posts)
-
-        # Zurück zur Startseite
         return redirect(url_for("index"))
 
     return render_template("add.html")
 
+# 🔥 Neue Route zum Löschen eines Posts
+@app.route("/delete/<int:post_id>", methods=["POST"])
+def delete(post_id):
+    posts = load_posts()
+    # Filtert alle Posts außer dem mit der passenden ID
+    updated_posts = [p for p in posts if p["id"] != post_id]
+    save_posts(updated_posts)
+    return redirect(url_for("index"))
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5006, debug=True)
+    app.run(host="0.0.0.0", port=5007, debug=True)
