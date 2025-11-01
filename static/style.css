@@ -1,78 +1,36 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f8f8f8;
 }
 
 h1 {
-    text-align: center;
-    color: #0066cc;
-}
-
-.posts {
-    max-width: 800px;
-    margin: 20px auto;
+  text-align: center;
 }
 
 .post {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.delete-btn {
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.delete-btn:hover {
-    background-color: #cc0000;
-}
-
-
-.edit-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-right: 8px;
-}
-.edit-btn:hover {
-    background-color: #0056b3;
-}
-
-.form { max-width: 720px; margin: 16px 0; }
-.form__group { margin-bottom: 12px; display: grid; gap: 6px; }
-.form__group label { font-weight: 600; }
-.form__group input, .form__group textarea {
-  padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px;
-  font: inherit; width: 100%;
-}
-.form__actions { display: flex; gap: 10px; align-items: center; }
-.btn--secondary {
-  display: inline-block; padding: 8px 12px; border-radius: 6px;
-  background: #eee; text-decoration: none; color: #333;
-}
-.btn--secondary:hover { background: #ddd; }
-
-.like-btn {
-  background-color: #ff4b5c;
+.button {
+  background: #008CBA;
   color: white;
-  border: none;
-  padding: 6px 12px;
+  text-decoration: none;
+  padding: 8px 12px;
   border-radius: 5px;
-  cursor: pointer;
+  margin-right: 5px;
 }
-.like-btn:hover {
-  background-color: #e03e50;
+
+.button:hover {
+  background: #005f73;
+}
+
+.delete {
+  background: #e63946;
 }

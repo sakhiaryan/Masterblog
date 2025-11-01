@@ -1,25 +1,30 @@
-<div class="posts">
-    {% for post in posts %}
-        <div class="post">
-            <h2>{{ post.title }}</h2>
-            <p><em>by {{ post.author }}</em></p>
-            <p>{{ post.content }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Flask Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>📝 My Flask Blog</h1>
 
-            <!-- 📝 Edit -->
-            <a href="{{ url_for('update', post_id=post.id) }}" class="edit-btn">✏️ Edit</a>
+    <a class="button" href="{{ url_for('add_post') }}">➕ Add New Post</a>
 
-            <!-- ❌ Delete -->
-            <form action="{{ url_for('delete', post_id=post.id) }}" method="POST" style="display:inline;">
-                <button type="submit" class="delete-btn">Delete</button>
-            </form>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="post">
+                <h2>{{ post.title }}</h2>
+                <p><strong>By:</strong> {{ post.author }}</p>
+                <p>{{ post.content }}</p>
+                <p>❤️ Likes: {{ post.likes }}</p>
 
-            <!-- ❤️ Like Button -->
-            <form action="{{ url_for('like', post_id=post.id) }}" method="POST" style="display:inline;">
-                <button type="submit" class="like-btn">❤️ {{ post.likes or 0 }}</button>
-            </form>
-
-        </div>
+                <a class="button" href="{{ url_for('like', post_id=post.id) }}">❤️ Like</a>
+                <a class="button" href="{{ url_for('update', post_id=post.id) }}">✏️ Edit</a>
+                <a class="button delete" href="{{ url_for('delete', post_id=post.id) }}">🗑️ Delete</a>
+            </div>
+        {% endfor %}
     {% else %}
         <p>No blog posts yet.</p>
-    {% endfor %}
-</div>
+    {% endif %}
+</body>
+</html>
