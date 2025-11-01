@@ -48,7 +48,28 @@ def add():
         return redirect(url_for("index"))
 
     return render_template("add.html")
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    if request.method == "POST":
+        author = request.form.get("author")
+        title = request.form.get("title")
+        content = request.form.get("content")
 
+        posts = load_posts()
+        new_id = max([p["id"] for p in posts], default=0) + 1
+        new_post = {
+            "id": new_id,
+            "author": author,
+            "title": title,
+            "content": content,
+            "likes": 0  # ❤️ Neues Feld
+        }
+
+        posts.append(new_post)
+        save_posts(posts)
+        return redirect(url_for("index"))
+
+    return render_template("add.html")
 
 @app.route("/delete/<int:post_id>", methods=["POST"])
 def delete(post_id):
@@ -58,6 +79,18 @@ def delete(post_id):
     save_posts(updated_posts)
     return redirect(url_for("index"))
 
+@app.route("/like/<int:post_id>", methods=["POST"])
+def like(post_id):
+    """Erhöht die Like-Zahl eines Posts um 1."""
+    posts = load_posts()
+    post = next((p for p in posts if p["id"] == post_id), None)
+
+    if post is None:
+        return "Post not found", 404
+
+    post["likes"] = post.get("likes", 0) + 1
+    save_posts(posts)
+    return redirect(url_for("index"))
 
 @app.route("/update/<int:post_id>", methods=["GET", "POST"])
 def update(post_id):

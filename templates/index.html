@@ -12,6 +12,12 @@
             <form action="{{ url_for('delete', post_id=post.id) }}" method="POST" style="display:inline;">
                 <button type="submit" class="delete-btn">Delete</button>
             </form>
+
+            <!-- ❤️ Like Button -->
+            <form action="{{ url_for('like', post_id=post.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="like-btn">❤️ {{ post.likes or 0 }}</button>
+            </form>
+
         </div>
     {% else %}
         <p>No blog posts yet.</p>
