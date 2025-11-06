@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Masterblog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <h1><a href="{{ url_for('index') }}">📝 Masterblog</a></h1>
+    <nav><a class="btn" href="{{ url_for('add') }}">➕ New Post</a></nav>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <section class="flash">
+        {% for category, msg in messages %}
+          <div class="flash__msg flash__msg--{{ category }}">{{ msg }}</div>
+        {% endfor %}
+      </section>
+    {% endif %}
+  {% endwith %}
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <small>© 2025 Masterblog — Flask App</small>
+  </footer>
+</body>
+</html>
